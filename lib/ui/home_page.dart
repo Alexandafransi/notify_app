@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:notify_app/services/notification_services.dart';
 import 'package:notify_app/services/theme_services.dart';
 import 'package:get/get.dart';
+import 'package:notify_app/ui/theme.dart';
+import 'package:notify_app/ui/widgets/button.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -27,12 +30,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: _appBar(),
       body: Column(
-        children: const [
-          Text("",
-          style: TextStyle(
-            fontSize: 30
-          ),
-          )
+        children:  [
+          _addTaskBar(),
         ],
       ),
     );
@@ -40,6 +39,8 @@ class _HomePageState extends State<HomePage> {
 
   _appBar(){
     return AppBar(
+      elevation: 0,
+      backgroundColor: context.theme.backgroundColor,
       leading: GestureDetector(
         onTap: (){
           ThemeService().switchTheme();
@@ -48,13 +49,45 @@ class _HomePageState extends State<HomePage> {
             body: Get.isDarkMode?"Activated Light Theme Alex": "Activated Dark Theme Alex"
           );
         },
-        child: const Icon(Icons.nightlight_round,
+        child:  Icon(Get.isDarkMode?Icons.sunny:Icons.nightlight_round,
+        color: Get.isDarkMode ? Colors.white: Colors.black,
         size: 25,),
       ),
       actions: const [
-        Icon(Icons.person, size: 25,),
+        CircleAvatar(
+
+          backgroundImage: AssetImage(
+            "images/alex.jpg"
+          ),
+
+        ),
         SizedBox(width: 20,)
       ],
+    );
+  }
+
+  _addTaskBar(){
+    return Container(
+      margin: const EdgeInsets.only(left: 20,right: 20,top: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            // margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(DateFormat.yMMMMd().format(DateTime.now()),
+                  style: subHeadingStyle,
+                ),
+
+                Text("Today", style: headingStyle,)
+              ],
+            ),
+          ),
+          MyButton(label: "+ Add Task", onTap: ()=>null)
+        ],
+      ),
     );
   }
 }
