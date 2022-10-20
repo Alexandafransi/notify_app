@@ -37,6 +37,7 @@ dependencies:
   get_storage:
   get:
   intl:
+  sqflite:
   google_fonts:
   date_picker_timeline:
   flutter_local_notifications:
