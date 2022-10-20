@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:notify_app/services/notification_services.dart';
 import 'package:notify_app/services/theme_services.dart';
 import 'package:get/get.dart';
+import 'package:notify_app/ui/add_task_bar.dart';
 import 'package:notify_app/ui/theme.dart';
 import 'package:notify_app/ui/widgets/button.dart';
 
@@ -97,7 +98,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          MyButton(label: "+ Add Task", onTap: () => null)
+          MyButton(label: "+ Add Task", onTap: () => Get.to(AddTaskPage()))
         ],
       ),
     );
